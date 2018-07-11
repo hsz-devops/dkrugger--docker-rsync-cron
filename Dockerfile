@@ -4,7 +4,8 @@ ENV \
     RSYNC_CRONTAB="0 0 * * *" \
     RSYNC_OPTIONS="--archive --timeout=3600" \
     RSYNC_UID="0" \
-    RSYNC_GID="0"
+    RSYNC_GID="0" \
+    USE_DATE_IN_DEST="1"
 
 RUN set -x; \
     apk add --no-cache --update \

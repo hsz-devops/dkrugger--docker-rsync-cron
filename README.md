@@ -39,7 +39,7 @@ docker run \
     -v master-svr/volume1/master:/rsync_src \
     -v local-svr/export:/rsync_dst \
     -e RSYNC_OPTIONS="--archive --timeout=3600 --delete"
-    dkruger/rsync-cron:latest
+    ez123/rsync-cron:latest
 ```
 
 ## About permissions
