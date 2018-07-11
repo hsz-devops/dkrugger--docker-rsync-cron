@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
-set -e
+set -ex
 
 # Make sure that the group and users specified by the user exist
 if ! getent group "${RSYNC_GID}" &>/dev/null; then

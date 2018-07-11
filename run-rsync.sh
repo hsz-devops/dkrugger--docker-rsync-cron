@@ -1,4 +1,5 @@
-set -e
+#!/bin/bash
+set -ex
 
 ### extract year, month, day to create sub-directories and format date to append to backup name.
 
