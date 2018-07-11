@@ -9,6 +9,7 @@ ENV \
 RUN set -x; \
     apk add --no-cache --update \
         rsync sudo \
+        bash \
         coreutils \
     && rm -rf /tmp/* \
     && rm -rf /var/cache/apk/*
