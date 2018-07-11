@@ -7,7 +7,9 @@ ENV \
     RSYNC_GID="0"
 
 RUN set -x; \
-    apk add --no-cache --update rsync sudo \
+    apk add --no-cache --update \
+        rsync sudo \
+        coreutils \
     && rm -rf /tmp/* \
     && rm -rf /var/cache/apk/*
 
