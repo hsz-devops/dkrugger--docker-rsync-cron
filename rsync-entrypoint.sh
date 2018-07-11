@@ -17,16 +17,7 @@ if ! getent group "${RSYNC_GROUP}" | grep "${RSYNC_USER}" &>/dev/null; then
     addgroup "${RSYNC_USER}" "${RSYNC_GROUP}"
 fi
 
-# Create a rsync script, makes it easier to sudo
-cat << EOF > /run-rsync.sh
-set -e
-sudo -u "${RSYNC_USER}" -g "${RSYNC_GROUP}" \
-    rsync \
-        ${RSYNC_OPTIONS} \
-        /rsync_src/ \
-        /rsync_dst
-EOF
 chmod +x /run-rsync.sh
 
 # Setup our crontab entry
-export CRONTAB_ENTRY="${RSYNC_CRONTAB} sh /run-rsync.sh"
+export CRONTAB_ENTRY="${RSYNC_CRONTAB} sh /run-rsync.sh ${RSYNC_USER} ${RSYNC_GROUP}"

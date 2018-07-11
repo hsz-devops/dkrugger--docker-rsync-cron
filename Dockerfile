@@ -16,3 +16,4 @@ RUN set -x; \
 VOLUME ["/rsync_src", "/rsync_dst"]
 
 COPY rsync-entrypoint.sh /entrypoint.d/rsync.sh
+COPY run-rsync.sh        /run-rsync.sh
