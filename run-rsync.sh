@@ -9,8 +9,8 @@ echo "current timestamp is: ${T_STAMP}"
 BACKUP_ROOT_SRC="/rsync_src"
 BACKUP_ROOT_DST="/rsync_dst"
 
-[ -d $"{BACKUP_ROOT_SRC}" ] || exit -3
-[ -d $"{BACKUP_ROOT_DST}" ] || exit -4
+[ -d "${BACKUP_ROOT_SRC}" ] || exit -3
+[ -d "${BACKUP_ROOT_DST}" ] || exit -4
 
 CURRENT_YEAR="${T_STAMP:0:4}"
 CURRENT_MONTH="${T_STAMP:4:2}"
