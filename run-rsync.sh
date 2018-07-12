@@ -10,8 +10,8 @@ echo $UID $GID $(whoami)
 T_STAMP=$(date -u  "+%Y%m%d_%H%M%SZ")
 echo "current timestamp is: ${T_STAMP}"
 
-BACKUP_ROOT_SRC="/rsync_dir/0.src"
-BACKUP_ROOT_DST="/rsync_dir/9.dst"
+BACKUP_ROOT_SRC="/rsync_dir/0.src/"
+BACKUP_ROOT_DST="/rsync_dir/9.dst/"
 
 [ -d "${BACKUP_ROOT_SRC}" ] || exit -3
 [ -d "${BACKUP_ROOT_DST}" ] || exit -4
@@ -21,23 +21,23 @@ if [ "${USE_DATE_IN_DEST}" == "1" ]; then
     CURRENT_MONTH="${T_STAMP:4:2}"
     CURRENT_DAY="${T_STAMP:6:2}"
     CHILD_DIRECTORY_NAME="${T_STAMP}"
-    BACKUP_DIRECTORY="${BACKUP_ROOT_DST}/${CURRENT_YEAR}/${CURRENT_MONTH}/${CURRENT_DAY}/${CHILD_DIRECTORY_NAME}"
+    BACKUP_DIR_DST="${BACKUP_ROOT_DST}/${CURRENT_YEAR}/${CURRENT_MONTH}/${CURRENT_DAY}/${CHILD_DIRECTORY_NAME}/"
 
     ### create backups directory if not present
-    mkdir -p "${BACKUP_DIRECTORY}"
+    mkdir -p "${BACKUP_DIR_DST}"
 else
-    BACKUP_DIRECTORY="${BACKUP_ROOT_DST}"
+    BACKUP_DIR_DST="${BACKUP_ROOT_DST}"
 fi
 
-[ -d "${BACKUP_DIRECTORY}" ] || exit -5
+[ -d "${BACKUP_DIR_DST}" ] || exit -5
 
 ## make sure folder is writeable by rsynccron
-chown -R "$1":"$2" "${BACKUP_DIRECTORY}"
+chown -R "$1":"$2" "${BACKUP_DIR_DST}"
 
-echo "backup directory: ${BACKUP_DIRECTORY}"
+echo "backup directory: ${BACKUP_DIR_DST}"
 
 sudo -u "$1" -g "$2" \
     rsync \
         ${RSYNC_OPTIONS} \
         "${BACKUP_ROOT_SRC}" \
-        "${BACKUP_DIRECTORY}"
+        "${BACKUP_DIR_DST}"
