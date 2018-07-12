@@ -1,8 +1,12 @@
 #!/bin/bash
 set -ex
 
-### extract year, month, day to create sub-directories and format date to append to backup name.
+echo $UID $GID $(whoami)
 
+[ -z "$1" ] && echo "RSYNC UID parameter not specified" && exit -1
+[ -z "$2" ] && echo "RSYNC GID parameter not specified" && exit -2
+
+### extract year, month, day to create sub-directories and format date to append to backup name.
 T_STAMP=$(date -u  "+%Y%m%d_%H%M%SZ")
 echo "current timestamp is: ${T_STAMP}"
 
@@ -20,10 +24,16 @@ if [ "${USE_DATE_IN_DEST}" == "1" ]; then
     BACKUP_DIRECTORY="${BACKUP_ROOT_DST}/${CURRENT_YEAR}/${CURRENT_MONTH}/${CURRENT_DAY}/${CHILD_DIRECTORY_NAME}"
 
     ### create backups directory if not present
-    [ -d "${BACKUP_DIRECTORY}" ] || mkdir -p "${BACKUP_DIRECTORY}"
+    mkdir -p "${BACKUP_DIRECTORY}"
 else
     BACKUP_DIRECTORY="${BACKUP_ROOT_DST}"
 fi
+
+[ -d "${BACKUP_DIRECTORY}" ] || exit -5
+
+## make sure folder is writeable by rsynccron
+chown -R "$1":"$2" "${BACKUP_DIRECTORY}"
+
 echo "backup directory: ${BACKUP_DIRECTORY}"
 
 sudo -u "$1" -g "$2" \
