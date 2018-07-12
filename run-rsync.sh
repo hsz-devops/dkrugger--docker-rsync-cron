@@ -10,8 +10,8 @@ echo $UID $GID $(whoami)
 T_STAMP=$(date -u  "+%Y%m%d_%H%M%SZ")
 echo "current timestamp is: ${T_STAMP}"
 
-BACKUP_ROOT_SRC="/rsync_src"
-BACKUP_ROOT_DST="/rsync_dst"
+BACKUP_ROOT_SRC="/rsync_dir/0.src"
+BACKUP_ROOT_DST="/rsync_dir/9.dst"
 
 [ -d "${BACKUP_ROOT_SRC}" ] || exit -3
 [ -d "${BACKUP_ROOT_DST}" ] || exit -4
