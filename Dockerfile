@@ -1,4 +1,4 @@
-FROM dkruger/cron:latest
+FROM ez123/cron:latest
 
 ENV \
     RSYNC_CRONTAB="0 0 * * *" \
