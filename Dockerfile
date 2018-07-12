@@ -28,6 +28,4 @@ RUN set -x; \
         /rsync_dir \
     && echo done...
 
-# setting 777 above to try and troubleshoot a weird behaviour when mounting azureFile on rsync_dir/0.src
-
 VOLUME ["/rsync_dir/0.src", "/rsync_dir/9.dst"]
