@@ -10,8 +10,9 @@ echo $UID $GID $(whoami)
 T_STAMP=$(date -u  "+%Y%m%d_%H%M%SZ")
 echo "current timestamp is: ${T_STAMP}"
 
-BACKUP_ROOT_SRC="/rsync_dir/0.src"
-BACKUP_ROOT_DST="/rsync_dir/9.dst"
+BACKUP_ROOT="/rsync_dir"
+BACKUP_ROOT_SRC="${BACKUP_ROOT}/0.src"
+BACKUP_ROOT_DST="${BACKUP_ROOT}/9.dst"
 
 [ -d "${BACKUP_ROOT_SRC}" ] || exit -3
 [ -d "${BACKUP_ROOT_DST}" ] || exit -4
@@ -31,8 +32,9 @@ fi
 
 [ -d "${BACKUP_DIR_DST}" ] || exit -5
 
-## make sure folder is writeable by rsynccron
-chown -R "$1":"$2" "${BACKUP_DIR_DST}"
+## make sure folder is writeable by the user
+## but not recursivelly (there may already be some files from previous backups in same day)
+chown "$1":"$2" "${BACKUP_DIR_DST}"
 
 echo "backup directory: ${BACKUP_DIR_DST}"
 
