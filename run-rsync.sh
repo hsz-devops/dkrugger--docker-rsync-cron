@@ -43,4 +43,5 @@ sudo -u "$1" -g "$2" \
     rsync \
         ${RSYNC_OPTIONS} \
         "." \
-        "${BACKUP_DIR_DST}"
+        "${BACKUP_DIR_DST}" \
+
