@@ -17,7 +17,5 @@ if ! getent group "${RSYNC_GROUP}" | grep "${RSYNC_USER}" &>/dev/null; then
     addgroup "${RSYNC_USER}" "${RSYNC_GROUP}"
 fi
 
-chmod +x /run-rsync.sh
-
 # Setup our crontab entry
 export CRONTAB_ENTRY="${RSYNC_CRONTAB} sh /run-rsync.sh ${RSYNC_USER} ${RSYNC_GROUP}"
