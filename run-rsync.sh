@@ -10,8 +10,8 @@ echo $UID $GID $(whoami)
 T_STAMP=$(date -u  "+%Y%m%d_%H%M%SZ")
 echo "current timestamp is: ${T_STAMP}"
 
-BACKUP_ROOT_SRC="/rsync_dir/0.src/"
-BACKUP_ROOT_DST="/rsync_dir/9.dst/"
+BACKUP_ROOT_SRC="/rsync_dir/0.src"
+BACKUP_ROOT_DST="/rsync_dir/9.dst"
 
 [ -d "${BACKUP_ROOT_SRC}" ] || exit -3
 [ -d "${BACKUP_ROOT_DST}" ] || exit -4
@@ -26,7 +26,7 @@ if [ "${USE_DATE_IN_DEST}" == "1" ]; then
     ### create backups directory if not present
     mkdir -p "${BACKUP_DIR_DST}"
 else
-    BACKUP_DIR_DST="${BACKUP_ROOT_DST}"
+    BACKUP_DIR_DST="${BACKUP_ROOT_DST}/"
 fi
 
 [ -d "${BACKUP_DIR_DST}" ] || exit -5
@@ -39,5 +39,5 @@ echo "backup directory: ${BACKUP_DIR_DST}"
 sudo -u "$1" -g "$2" \
     rsync \
         ${RSYNC_OPTIONS} \
-        "${BACKUP_ROOT_SRC}" \
+        "${BACKUP_ROOT_SRC}/" \
         "${BACKUP_DIR_DST}"
