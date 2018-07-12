@@ -36,8 +36,9 @@ chown -R "$1":"$2" "${BACKUP_DIR_DST}"
 
 echo "backup directory: ${BACKUP_DIR_DST}"
 
+pushd "${BACKUP_ROOT_SRC}"
 sudo -u "$1" -g "$2" \
     rsync \
         ${RSYNC_OPTIONS} \
-        "${BACKUP_ROOT_SRC}/" \
+        "." \
         "${BACKUP_DIR_DST}"
