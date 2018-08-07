@@ -3,8 +3,8 @@ set -ex
 
 echo $UID $GID $(whoami)
 
-[ -z "$1" ] && echo "RSYNC UID parameter not specified" && exit -1
-[ -z "$2" ] && echo "RSYNC GID parameter not specified" && exit -2
+[ -z "$1" ] && echo "Cron job UID parameter not specified" && exit -1
+[ -z "$2" ] && echo "Cron job GID parameter not specified" && exit -2
 
 ### extract year, month, day to create sub-directories and format date to append to backup name.
 T_STAMP=$(date -u  "+%Y%m%d_%H%M%SZ")
