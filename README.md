@@ -17,11 +17,11 @@ exmaple of setting up the container with named NFS volumes using `Netshare`.
 The image is configurable via environment variables for configuring the rsync
 command settings:
 
-* `RSYNC_CRONTAB`: The crontab time entry, defaults to nightly at midnight
+* `DUMP_CRONTAB`: The crontab time entry, defaults to nightly at midnight
 * `RSYNC_OPTIONS`: Flags passed to `rsync`, defaults to
 `--archive --timeout=3600`
-* `RSYNC_UID`: The UID to use when calling rsync, defaults to 0
-* `RSYNC_GID`: The GID to use when calling rsync, defaults to 0
+* `DUMP_UID`: The UID to use when calling rsync, defaults to 0
+* `DUMP_GID`: The GID to use when calling rsync, defaults to 0
 
 The image defines two volumes: `/rsync_src`, and `/rsync_dst`. The contents of
 `/rsync_src` will be copied to `/rsync_dst` on the interval defined by the

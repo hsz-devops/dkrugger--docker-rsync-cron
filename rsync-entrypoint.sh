@@ -1,20 +1,21 @@
 #!/usr/bin/env bash
+
 set -ex
 
 # Make sure that the group and users specified by the user exist
-if ! getent group "${RSYNC_GID}" &>/dev/null; then
-    addgroup -g "${RSYNC_GID}" "rsynccron"
+if ! getent group "${DUMP_GID}" &>/dev/null; then
+    addgroup -g "${DUMP_GID}" "${DUMP_USER_IF_NEW}"
 fi
-RSYNC_GROUP="$(getent group "${RSYNC_GID}" | cut -d: -f1)"
+DUMP_GROUP="$(getent group "${DUMP_GID}" | cut -d: -f1)"
 
-if ! getent passwd "${RSYNC_UID}" &>/dev/null; then
-    adduser -u "${RSYNC_UID}" -D -H "rsynccron" -G "${RSYNC_GROUP}"
+if ! getent passwd "${DUMP_UID}" &>/dev/null; then
+    adduser -u "${DUMP_UID}" -D -H "${DUMP_USER_IF_NEW}" -G "${DUMP_GROUP}"
 fi
-RSYNC_USER="$(getent passwd "${RSYNC_UID}" | cut -d: -f1)"
+DUMP_USER="$(getent passwd "${DUMP_UID}" | cut -d: -f1)"
 
-if ! getent group "${RSYNC_GROUP}" | grep "${RSYNC_USER}" &>/dev/null; then
-    addgroup "${RSYNC_USER}" "${RSYNC_GROUP}"
+if ! getent group "${DUMP_GROUP}" | grep "${DUMP_USER}" &>/dev/null; then
+    addgroup "${DUMP_USER}" "${DUMP_GROUP}"
 fi
 
 # Setup our crontab entry
-export CRONTAB_ENTRY="${RSYNC_CRONTAB} bash /run-rsync.sh ${RSYNC_USER} ${RSYNC_GROUP}"
+export CRONTAB_ENTRY="${DUMP_CRONTAB} bash /run-rsync.sh ${DUMP_USER} ${DUMP_GROUP}"

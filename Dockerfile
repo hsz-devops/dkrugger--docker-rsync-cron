@@ -1,11 +1,12 @@
 FROM ez123/cron:alpine
 
 ENV \
-    RSYNC_CRONTAB="0 0 * * *" \
+    DUMP_CRONTAB="0 0 * * *" \
+    DUMP_UID="0" \
+    DUMP_GID="0" \
+    USE_DATE_IN_DEST="1" \
     RSYNC_OPTIONS="--archive --timeout=3600" \
-    RSYNC_UID="0" \
-    RSYNC_GID="0" \
-    USE_DATE_IN_DEST="1"
+    DUMP_USER_IF_NEW=rsynccron
 
 COPY rsync-entrypoint.sh /entrypoint.d/rsync.sh
 COPY run-rsync.sh        /run-rsync.sh
