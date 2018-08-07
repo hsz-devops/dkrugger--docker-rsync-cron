@@ -1,5 +1,4 @@
-#!/bin/bash
-
+#!/usr/bin/env bash
 set -ex
 
 # Make sure that the group and users specified by the user exist
