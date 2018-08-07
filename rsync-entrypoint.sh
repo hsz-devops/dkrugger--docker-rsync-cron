@@ -18,4 +18,4 @@ if ! getent group "${RSYNC_GROUP}" | grep "${RSYNC_USER}" &>/dev/null; then
 fi
 
 # Setup our crontab entry
-export CRONTAB_ENTRY="${RSYNC_CRONTAB} sh /run-rsync.sh ${RSYNC_USER} ${RSYNC_GROUP}"
+export CRONTAB_ENTRY="${RSYNC_CRONTAB} bash /run-rsync.sh ${RSYNC_USER} ${RSYNC_GROUP}"
