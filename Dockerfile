@@ -1,4 +1,4 @@
-FROM ez123/cron:latest
+FROM ez123/cron:alpine
 
 ENV \
     RSYNC_CRONTAB="0 0 * * *" \
@@ -24,8 +24,11 @@ RUN set -x; \
     && mkdir -p \
         /rsync_dir/0.src \
         /rsync_dir/9.dst \
-    && chmod -R a+rwx \
-        /rsync_dir \
+    && chmod a+rwx \
+        /tar_dir \
+        /tar_dir/9.dst \
+    && chmod a=rx \
+        /tar_dir/0.src \
     && echo done...
 
 VOLUME ["/rsync_dir/0.src", "/rsync_dir/9.dst"]
