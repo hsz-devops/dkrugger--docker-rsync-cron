@@ -14,6 +14,10 @@ BACKUP_ROOT="/rsync_dir"
 BACKUP_ROOT_SRC="${BACKUP_ROOT}/0.src"
 BACKUP_ROOT_DST="${BACKUP_ROOT}/9.dst"
 
+ls -la "${BACKUP_ROOT}" ||true
+ls -la "${BACKUP_ROOT_SRC}" ||true
+ls -la "${BACKUP_ROOT_DST}" ||true
+
 [ -d "${BACKUP_ROOT_SRC}" ] || exit -3
 [ -d "${BACKUP_ROOT_DST}" ] || exit -4
 
@@ -30,6 +34,7 @@ else
     BACKUP_DIR_DST="${BACKUP_ROOT_DST}/"
 fi
 
+ls -la "${BACKUP_DIR_DST}" ||true
 [ -d "${BACKUP_DIR_DST}" ] || exit -5
 
 ## make sure folder is writeable by the user
@@ -38,6 +43,7 @@ chown "$1":"$2" "${BACKUP_DIR_DST}"
 
 echo "backup directory: ${BACKUP_DIR_DST}"
 
+ls -la "${BACKUP_ROOT_SRC}" ||true
 pushd "${BACKUP_ROOT_SRC}"
 sudo -u "$1" -g "$2" \
     rsync \
