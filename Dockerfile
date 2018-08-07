@@ -22,13 +22,13 @@ RUN set -x; \
         /entrypoint.d/rsync.sh \
         /run-rsync.sh \
     && mkdir -p \
-        /rsync_dir/0.src \
-        /rsync_dir/9.dst \
+        /mnt_dir/0.src \
+        /mnt_dir/9.dst \
     && chmod a+rwx \
-        /tar_dir \
-        /tar_dir/9.dst \
+        /mnt_dir \
+        /mnt_dir/9.dst \
     && chmod a=rx \
-        /tar_dir/0.src \
+        /mnt_dir/0.src \
     && echo done...
 
-VOLUME ["/rsync_dir/0.src", "/rsync_dir/9.dst"]
+VOLUME ["/mnt_dir/0.src", "/mnt_dir/9.dst"]
